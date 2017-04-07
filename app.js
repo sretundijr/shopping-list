@@ -3,7 +3,9 @@
 //create application state object
 //stores list items in an array
 var appState = {
-    item: []
+    item: [
+        //'apples'
+    ]
 }
 
 //create setter for app state
@@ -15,8 +17,11 @@ function addItem(appState, item){
 //item
 function removeItem(appState, item){
     for(var i = 0; i < appState.item.length; i++){
+        // console.log("is it work" + appState.item[i]);
+        
         if(appState.item[i].toLowerCase() === item.toLowerCase()){
-            appState.items.slice(i, 1);
+            // console.log("is it work2" + item.toLowerCase());    
+            appState.item.splice(i, 1);
         }
     }
 }
@@ -30,7 +35,7 @@ function checkMark(checkedItem){
 $(function(){
     //form listener
     $('#js-shopping-list-form').submit(function(e){
-        alert("Im here");
+        // alert("Im here");
         e.preventDefault();
         addItem(appState, $('#shopping-list-entry').val());
         // console.log(appState.item);
@@ -50,8 +55,10 @@ $(function(){
     //call to remove item function
     $('.shopping-list')
         .on('click', '.shopping-item-delete', function(e){
-            console.log($(this).parent().prev().text());
-            removeItem(appState, $(this).val);
+            // console.log(appState.item[0])
+            // console.log($(this).parent().prev().text());
+            removeItem(appState, $(this).parent().prev().text());
             $(this).closest('li').remove();
+            // console.log("still here?" + appState.item);
     });
 })
