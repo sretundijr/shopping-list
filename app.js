@@ -22,3 +22,13 @@ function checkMark(checkedItem){
     checkedItem.toggleClass('shopping-item-checked');
 }
 
+//page load and listeners
+$(function(){
+    //form listener
+    $('#js-shopping-list-form').submit(function(e){
+        alert("Im here");
+        e.preventDefault();
+        addItem(appState, $('#shopping-list-entry').val());
+        console.log(appState.item[0]);
+    });
+})
