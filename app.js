@@ -9,6 +9,11 @@ var appState = {
 //create setter for app state
 function addItem(appState, item){
     appState.item.push(item);
+    //make call to list elememnt
+    listElement(item);
+    //clear input box after submit
+    // $('js-shopping-list-form').reset();
+    console.log($('js-shopping-list-form'));
 }
 
 //remove function, permenantly deletes the list
@@ -35,7 +40,8 @@ $(function(){
     $('#js-shopping-list-form').submit(function(e){
         // prevent default form behavior
         e.preventDefault();
-        addItem(appState, $('#shopping-list-entry').val());
+        var inputValue =  $('#shopping-list-entry').val()
+        addItem(appState, inputValue);
     });
 
     //toggle checked listener
@@ -54,3 +60,19 @@ $(function(){
             $(this).closest('li').remove();
     });
 })
+
+//function creates the list element
+function listElement(item){
+    var element = '<li>' +
+        '<span class="shopping-item">'+ item +'</span>' +
+        '<div class="shopping-item-controls">' +
+          '<button class="shopping-item-toggle">' +
+            '<span class="button-label">check</span>' +
+          '</button>' +
+          '<button class="shopping-item-delete">' +
+            '<span class="button-label">delete</span>' +
+          '</button>' +
+        '</div>' +
+      '</li>';
+      $('.shopping-list').append(element);
+}
