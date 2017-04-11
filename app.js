@@ -75,6 +75,9 @@ function listElement(item){
       $('.shopping-list').append(element);
 }
 
+//I think this method would better suited to load data from the server
+//on initial start up and then a single item render function would be needed to 
+//render a single item to the ui when the user adds one??
 //renders html 
 function renderHtml(appState){
     //removes the previous rendering, seems hacky
