@@ -80,6 +80,9 @@ function listElement(item){
 
 //renders html 
 function renderHtml(appState){
+    //removes the previous rendering, seems hacky
+    $('.shopping-list').children().remove();
+    
     appState.item.forEach(function(item){
         listElement(item);
     })
