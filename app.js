@@ -9,11 +9,8 @@ var appState = {
 //create setter for app state
 function addItem(item){
     appState.item.push(item);
-    //make call to list elememnt
-    //listElement(item);
-    //clear input box after submit
-    // $('js-shopping-list-form').reset();
-    // console.log($('js-shopping-list-form'));
+
+    renderHtml(appState);
 }
 
 //remove function, permenantly deletes the list
@@ -44,7 +41,6 @@ $(function(){
         e.preventDefault();
         var inputValue =  $('#shopping-list-entry').val()
         addItem(inputValue);
-        renderHtml(appState);
     });
 
     //toggle checked listener
@@ -60,8 +56,6 @@ $(function(){
     $('.shopping-list')
         .on('click', '.shopping-item-delete', function(e){
             removeItem(appState, $(this).parent().prev().text());
-            // console.log($(this).parent().prev.index());
-            $(this).closest('li').remove();
     });
 })
 
