@@ -19,12 +19,14 @@ function addItem(item){
 //remove function, permenantly deletes the list
 //item
 function removeItem(appState, item){
-    for(var i = 0; i < appState.item.length; i++){
-        //checks if item exists before removal
-        if(appState.item[i].toLowerCase() === item.toLowerCase()){
-            appState.item.splice(i, 1);
-        }
-    }
+
+    var index = appState.item.findIndex(function(index){
+        return index === item;
+    });
+
+    appState.item.splice(index, 1);
+
+    renderHtml(appState);
 }
 
 //checked item function
@@ -58,6 +60,7 @@ $(function(){
     $('.shopping-list')
         .on('click', '.shopping-item-delete', function(e){
             removeItem(appState, $(this).parent().prev().text());
+            // console.log($(this).parent().prev.index());
             $(this).closest('li').remove();
     });
 })
@@ -82,7 +85,7 @@ function listElement(item){
 function renderHtml(appState){
     //removes the previous rendering, seems hacky
     $('.shopping-list').children().remove();
-    
+
     appState.item.forEach(function(item){
         listElement(item);
     })
