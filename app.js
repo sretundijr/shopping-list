@@ -7,13 +7,13 @@ var appState = {
 }
 
 //create setter for app state
-function addItem(appState, item){
+function addItem(item){
     appState.item.push(item);
     //make call to list elememnt
-    listElement(item);
+    //listElement(item);
     //clear input box after submit
     // $('js-shopping-list-form').reset();
-    console.log($('js-shopping-list-form'));
+    // console.log($('js-shopping-list-form'));
 }
 
 //remove function, permenantly deletes the list
@@ -41,7 +41,8 @@ $(function(){
         // prevent default form behavior
         e.preventDefault();
         var inputValue =  $('#shopping-list-entry').val()
-        addItem(appState, inputValue);
+        addItem(inputValue);
+        renderHtml(appState);
     });
 
     //toggle checked listener
@@ -75,4 +76,11 @@ function listElement(item){
         '</div>' +
       '</li>';
       $('.shopping-list').append(element);
+}
+
+//renders html 
+function renderHtml(appState){
+    appState.item.forEach(function(item){
+        listElement(item);
+    })
 }
