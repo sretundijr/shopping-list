@@ -10,10 +10,6 @@ function addItem(appState, item){
         item: item,
         isChecked: false
     };
-    // appState.push({listItem.item = item, listItem.isChecked = false});
-    // console.log(appState.item + " " + appState.isChecked);
-    // appState.push(listItem);
-    renderHtml(appState);
     return appState.concat([listItem]);
 }
 
@@ -32,6 +28,7 @@ function removeItem(appState, item){
 
 //checked item function
 function checkMark(checkedItem){
+
     checkedItem.toggleClass('shopping-item__checked');
 }
 
@@ -45,6 +42,8 @@ $(function(){
         e.preventDefault();
         var inputValue =  $('#shopping-list-entry').val()
         appState = addItem(appState, inputValue);
+        renderHtml(appState);
+        
     });
 
     //toggle checked listener
@@ -76,22 +75,13 @@ function listElement(item){
           '</button>' +
         '</div>' +
       '</li>';
-    //   $('.shopping-list').append(element);
 }
 
-//I think this method would better suited to load data from the server
-//on initial start up and then a single item render function would be needed to 
-//render a single item to the ui when the user adds one??
-//renders html 
 function renderHtml(appState){
-    //removes the previous rendering, seems hacky
-    // $('.shopping-list').children().remove();
-
     var arr = appState.map(function(item){
         
         return listElement(item.item);
     })
 
-    console.log(arr);
     $('.shopping-list').html(arr.join(''));
 }
