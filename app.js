@@ -2,14 +2,17 @@
 
 //create application state object
 //stores list items in an array
-var appState = {
-    item: []
-}
+var appState = [];
 
 //create setter for app state
-function addItem(item){
-    appState.item.push(item);
-
+function addItem(appState, item){
+    var listItem = {
+        item: item,
+        isChecked: false
+    };
+    // appState.push({listItem.item = item, listItem.isChecked = false});
+    // console.log(appState.item + " " + appState.isChecked);
+    appState.push(listItem);
     renderHtml(appState);
 }
 
@@ -40,7 +43,7 @@ $(function(){
         // prevent default form behavior
         e.preventDefault();
         var inputValue =  $('#shopping-list-entry').val()
-        addItem(inputValue);
+        addItem(appState, inputValue);
     });
 
     //toggle checked listener
@@ -83,7 +86,7 @@ function renderHtml(appState){
     //removes the previous rendering, seems hacky
     $('.shopping-list').children().remove();
 
-    appState.item.forEach(function(item){
-        listElement(item);
+    appState.forEach(function(item){
+        listElement(item.item);
     })
 }
