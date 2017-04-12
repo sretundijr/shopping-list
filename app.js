@@ -20,11 +20,11 @@ function addItem(appState, item){
 //item
 function removeItem(appState, item){
 
-    var index = appState.item.findIndex(function(index){
-        return index === item;
+    var index = appState.findIndex(function(index){
+        return index.item === item;
     });
 
-    appState.item.splice(index, 1);
+    appState.splice(index, 1);
 
     renderHtml(appState);
 }
