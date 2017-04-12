@@ -27,8 +27,12 @@ function removeItem(appState, item){
 }
 
 //checked item function
-function checkMark(checkedItem){
-
+function checkMark(appState, checkedItem){
+    if(appState.isChecked){
+        appState.isChecked = false;
+    } else {
+        appState.isChecked = true;
+    }
     checkedItem.toggleClass('shopping-item__checked');
 }
 
@@ -49,7 +53,7 @@ $(function(){
     //toggle checked listener
     $('.shopping-list')
         .on('click', '.shopping-item-toggle', function(e){
-            checkMark($(this)
+            checkMark(appState, $(this)
                 .parent()
                 .prev());
     });
