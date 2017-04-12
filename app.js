@@ -12,8 +12,9 @@ function addItem(appState, item){
     };
     // appState.push({listItem.item = item, listItem.isChecked = false});
     // console.log(appState.item + " " + appState.isChecked);
-    appState.push(listItem);
+    // appState.push(listItem);
     renderHtml(appState);
+    return appState.concat([listItem]);
 }
 
 //remove function, permenantly deletes the list
@@ -43,7 +44,7 @@ $(function(){
         // prevent default form behavior
         e.preventDefault();
         var inputValue =  $('#shopping-list-entry').val()
-        addItem(appState, inputValue);
+        appState = addItem(appState, inputValue);
     });
 
     //toggle checked listener
@@ -64,7 +65,7 @@ $(function(){
 
 //function creates the list element
 function listElement(item){
-    var element = '<li>' +
+    return '<li>' +
         '<span class="shopping-item">'+ item +'</span>' +
         '<div class="shopping-item-controls">' +
           '<button class="shopping-item-toggle">' +
@@ -75,7 +76,7 @@ function listElement(item){
           '</button>' +
         '</div>' +
       '</li>';
-      $('.shopping-list').append(element);
+    //   $('.shopping-list').append(element);
 }
 
 //I think this method would better suited to load data from the server
@@ -84,9 +85,13 @@ function listElement(item){
 //renders html 
 function renderHtml(appState){
     //removes the previous rendering, seems hacky
-    $('.shopping-list').children().remove();
+    // $('.shopping-list').children().remove();
 
-    appState.forEach(function(item){
-        listElement(item.item);
+    var arr = appState.map(function(item){
+        
+        return listElement(item.item);
     })
+
+    console.log(arr);
+    $('.shopping-list').html(arr.join(''));
 }
